@@ -31,6 +31,18 @@ Directly pasting the script in the console wont work, read the usage guide below
 -   `chunk`: specifies the number of words to fetch from the library on each attempt (keep default)
 -   `attempts`: specifies the number of attemps (keep default)
 
+## Quick Usage
+
+You can paste the script below to run the script quickly with the default options instead of having to copy paste the whole script code. Although, you still have to do the first three steps mentioned in [usage guide](#usage-guide)
+
+```js
+fetch(
+    "https://raw.githubusercontent.com/SwordaxSy/jklm.fun-bombparty-cheat/main/index.js"
+)
+    .then((res) => res.text())
+    .then((data) => eval(data));
+```
+
 ## Dependencies
 
 -   This project makes use of this [API](https://random-word-api.herokuapp.com/)
