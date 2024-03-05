@@ -16,6 +16,7 @@ Usage Guide:
 
 Options Guide:
 - `autotype`: when set true, the word will be automatically typed in your game input, you just have to hit enter
+- `selfOnly`: when set true, words will only be logged in console when its your own turn
 - `lang`: you can choose from the supported languages below:
     - en: English
     - es: Spanish
@@ -29,6 +30,7 @@ Options Guide:
 
 ((
     autotype = true,
+    selfOnly = false,
     lang = "en",
     lengths = [4, 5, 6],
     chunk = 100,
@@ -132,10 +134,14 @@ Options Guide:
             fetchWords().then((data) => {
                 const word = data.find((el) => el.includes(letters));
                 if (!word) return cheat(atmpts + 1);
-                console.log(
-                    `%c${word}`,
-                    myTurn ? logStyles.myWord : logStyles.word
-                );
+
+                if (!selfOnly || myTurn) {
+                    console.log(
+                        `%c${word}`,
+                        myTurn ? logStyles.myWord : logStyles.word
+                    );
+                }
+
                 if (autotype) {
                     input.value = word;
                     input.select();
