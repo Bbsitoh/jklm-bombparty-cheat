@@ -20,7 +20,7 @@ Directly pasting the script in the console wont work, read the usage guide below
 ## Options Guide:
 
 -   `autotype`: when set true, the word will be automatically typed in your game input, you just have to hit enter
--   `selfOnly`: when set true, words will only be logged in console when its your own turn
+-   `selfOnly`: when set true, words will be logged in console only when its your own turn
 -   `lang`: you can choose from the supported languages below:
     -   en: English
     -   es: Spanish
