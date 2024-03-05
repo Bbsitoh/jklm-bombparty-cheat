@@ -91,11 +91,9 @@ Options Guide:
     }
 
     // observer
-    const observer = new MutationObserver((mutations) => {
-        mutations.forEach((mutation) => {
-            myTurn = selfTurn.getAttribute("hidden") === null;
-            cheat();
-        });
+    const observer = new MutationObserver(() => {
+        myTurn = selfTurn.getAttribute("hidden") === null;
+        cheat();
     });
 
     observer.observe(selfTurn, {
