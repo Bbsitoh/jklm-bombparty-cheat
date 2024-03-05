@@ -1,6 +1,6 @@
 # jklm.fun BombParty Cheat Script
 
-This is a cheat script for https://jklm.fun BombParty game
+This is a cheat script for https://jklm.fun BombParty game<br />
 Directly pasting the script in the console wont work, read the usage guide below
 
 ## Usage Guide:
