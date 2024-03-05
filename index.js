@@ -69,7 +69,7 @@ Options Guide:
 
     if (!syllable || !selfTurn)
         error =
-            "Error: incorrect javascript context, please switch to 'bombparty/' javascript context";
+            "Error: incorrect javascript context, please switch to 'bombparty/' javascript context. Read the usage guide.";
 
     if (!["en", "es", "it", "fr", "de"].includes(lang))
         error = "Error: supported languages are: en, es, it, fr, de";
