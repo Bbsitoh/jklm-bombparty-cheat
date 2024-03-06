@@ -106,7 +106,7 @@ Options Guide:
             try {
                 const responses = await Promise.all(
                     lengths.map((length) =>
-                        fetch(api + `&length=${length}`, { mode: "no-cors" })
+                        fetch(api + `&length=${length}`)
                     )
                 );
 
