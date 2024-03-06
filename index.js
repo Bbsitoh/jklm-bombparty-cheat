@@ -54,7 +54,7 @@ Options Guide:
     );
     console.log("%cBy Swordax: https://linktr.ee/swordax", logStyles.welcome);
     console.log(
-        "%cGithub repo: https://github.com/SwordaxSy/jklm.fun-bombparty-cheat",
+        "%cGithub repo: https://github.com/SwordaxSy/jklm-bombparty-cheat",
         logStyles.welcome
     );
 
@@ -105,9 +105,7 @@ Options Guide:
         return new Promise(async (resolve, reject) => {
             try {
                 const responses = await Promise.all(
-                    lengths.map((length) =>
-                        fetch(api + `&length=${length}`)
-                    )
+                    lengths.map((length) => fetch(api + `&length=${length}`))
                 );
 
                 const arrays = await Promise.all(
