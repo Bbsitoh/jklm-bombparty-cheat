@@ -105,7 +105,9 @@ Options Guide:
         return new Promise(async (resolve, reject) => {
             try {
                 const responses = await Promise.all(
-                    lengths.map((length) => fetch(api + `&length=${length}`))
+                    lengths.map((length) =>
+                        fetch(api + `&length=${length}`, { mode: "no-cors" })
+                    )
                 );
 
                 const arrays = await Promise.all(
