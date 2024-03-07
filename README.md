@@ -30,6 +30,7 @@ Directly pasting the script in the console wont work, read the usage guide below
 -   `lengths` (array): specifies the length of the words that will be attempted. Increase lengths for more difficult words. Order of the lengths specifies length priority.
 -   `instant` (boolean): specifies typing mode; whether the word should be instantly pasted or slowly typed
 -   `pause` (number): typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)
+-   `initialPause` (number): the initial pause before typing the word (in milliseconds)
 -   `chunk` (number): specifies the number of words to fetch from the words library on each attempt (keep default)
 -   `attempts` (number): specifies the number of attemps (keep default)
 

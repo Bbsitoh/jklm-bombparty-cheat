@@ -26,6 +26,7 @@ Options Guide:
 -   `lengths` (array): specifies the length of the words that will be attempted. Increase lengths for more difficult words. Order of the lengths specifies length priority.
 -   `instant` (boolean): specifies typing mode; whether the word should be instantly pasted or slowly typed
 -   `pause` (number): typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)
+-   `initialPause` (number): the initial pause before typing the word (in milliseconds)
 -   `chunk` (number): specifies the number of words to fetch from the words library on each attempt (keep default)
 -   `attempts` (number): specifies the number of attemps (keep default)
 */
@@ -37,6 +38,7 @@ Options Guide:
     lengths = [4, 5, 6],
     instant = false,
     pause = 150,
+    initialPause = 1500,
     chunk = 100,
     attempts = 20
 ) => {
@@ -74,26 +76,27 @@ Options Guide:
 
     if (!syllable || !selfTurn)
         error =
-            "Error: incorrect javascript context, please switch to 'bombparty/' javascript context. Read the usage guide.";
+            "incorrect javascript context, please switch to 'bombparty/' javascript context. Read the usage guide.";
 
     if (!["en", "es", "it", "fr", "de"].includes(lang))
-        error = "Error: supported languages are: en, es, it, fr, de";
+        error = "supported languages are: en, es, it, fr, de";
 
     if (
         !Array.isArray(lengths) ||
         !lengths.every((length) => Number.isInteger(length))
     )
-        error = "Error: lengths must be an array of integers";
+        error = "lengths must be an array of integers";
 
-    if (isNaN(pause)) error = "Error: pause must be a number";
+    if (isNaN(pause)) error = "pause must be a number";
 
-    if (!Number.isInteger(chunk)) error = "Error: chunk must be an integer";
+    if (isNaN(initialPause)) error = "initialPause must be a number";
 
-    if (!Number.isInteger(attempts))
-        error = "Error: attempts must be an integer";
+    if (!Number.isInteger(chunk)) error = "chunk must be an integer";
+
+    if (!Number.isInteger(attempts)) error = "attempts must be an integer";
 
     if (error) {
-        console.log(`%c${error}`, logStyles.error);
+        console.log(`%cError: ${error}`, logStyles.error);
         return;
     }
 
@@ -158,6 +161,9 @@ Options Guide:
      * @param {string} word - A string of letters to type
      */
     async function typeLetters(word) {
+        // initial pause
+        await sleep(initialPause);
+
         for (const char of word) {
             input.value = input.value + char;
             input.dispatchEvent(new Event("input", { bubbles: true }));
