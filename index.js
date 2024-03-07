@@ -38,7 +38,7 @@ Options Guide:
     lengths = [4, 5, 6],
     instant = false,
     pause = 150,
-    initialPause = 1500,
+    initialPause = 1000,
     chunk = 100,
     attempts = 20
 ) => {
