@@ -19,20 +19,17 @@ Directly pasting the script in the console wont work, read the usage guide below
 
 ## Options Guide:
 
--   `autotype` (boolean): when set true, the word will be automatically typed in your game input, you just have to hit enter
--   `selfOnly` (boolean): when set true, words will be logged in console only when its your own turn
--   `lang` (string): you can choose from the supported languages below:
-    -   en: English
-    -   es: Spanish
-    -   it: Italian
-    -   fr: French
-    -   de: German
--   `lengths` (array): specifies the length of the words that will be attempted. Increase lengths for more difficult words. Order of the lengths specifies length priority.
--   `instant` (boolean): specifies typing mode; whether the word should be instantly pasted or slowly typed
--   `pause` (number): typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)
--   `initialPause` (number): the initial pause before typing the word (in milliseconds)
--   `chunk` (number): specifies the number of words to fetch from the words library on each attempt (keep default)
--   `attempts` (number): specifies the number of attemps (keep default)
+| Option Name    | Option Type | Default Value | Description                                                                                                                                                        |
+| -------------- | ----------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `autotype`     | Boolean     | `true`        | When set true, the word will be automatically typed in your game input, you just have to hit enter                                                                 |
+| `selfOnly`     | Boolean     | `false`       | When set true, words will be logged in console only when its your own turn                                                                                         |
+| `lang`         | String      | `"en"`        | You can choose one of the supported languages: en, es, it, fr, de                                                                                                  |
+| `lengths`      | Array       | `[4, 5, 6]`   | Specifies the length of the words that will be attempted. Increase lengths for more difficult words. The order of the lengths contributes in the priority of words |
+| `instant`      | Boolean     | `false`       | When set true, word will be instantly pasted and not typed letter by letter                                                                                        |
+| `pause`        | Number      | `150`         | Typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)                                                                |
+| `initialPause` | Number      | `1000`        | The initial pause before typing the word (in milliseconds)                                                                                                         |
+| `chunk`        | Number      | `100`         | Specifies the number of words to fetch from the words library on each attempt                                                                                      |
+| `attempts`     | Number      | `20`          | Specifies the number of attemps                                                                                                                                    |
 
 ## Quick Usage
 
@@ -49,3 +46,4 @@ fetch(
 ## Dependencies
 
 -   This project makes use of this [API](https://random-word-api.herokuapp.com/)
+-   If the script doesn't work. Then either the API is broken, or the game has been patched. Either way DM me to fix it

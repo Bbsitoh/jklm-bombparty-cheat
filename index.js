@@ -1,34 +1,9 @@
 /*
 This is a cheat script for https://jklm.fun BombParty game
-Directly pasting the script in the console wont work, read the usage guide below
+Directly pasting the script in the console wont work
+Read the usage guide (https://github.com/SwordaxSy/jklm-bombparty-cheat)
 
-Script by Swordax (https://github.com/SwordaxSy)
-*/
-
-/*
-Usage Guide:
-1. Open devtools inspect
-2. Open the console tab
-3. Do one of the following options:
-    - Set the Javascript context to bombparty/
-    - Using the manual inspect element selection tool, select an element in the center of the game screen
-4. Paste the script in the console tab and hit enter
-
-Options Guide:
--   `autotype` (boolean): when set true, the word will be automatically typed in your game input, you just have to hit enter
--   `selfOnly` (boolean): when set true, words will be logged in console only when its your own turn
--   `lang` (string): you can choose from the supported languages below:
-    -   en: English
-    -   es: Spanish
-    -   it: Italian
-    -   fr: French
-    -   de: German
--   `lengths` (array): specifies the length of the words that will be attempted. Increase lengths for more difficult words. Order of the lengths specifies length priority.
--   `instant` (boolean): specifies typing mode; whether the word should be instantly pasted or slowly typed
--   `pause` (number): typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)
--   `initialPause` (number): the initial pause before typing the word (in milliseconds)
--   `chunk` (number): specifies the number of words to fetch from the words library on each attempt (keep default)
--   `attempts` (number): specifies the number of attemps (keep default)
+Script by Swordax (https://linktr.ee/swordax)
 */
 
 ((
