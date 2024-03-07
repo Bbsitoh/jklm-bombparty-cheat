@@ -68,7 +68,7 @@ Options Guide:
     const seating = document.querySelector(".bottom .seating");
     const input = document.querySelector(".selfTurn input");
 
-    // verify options & environment
+    // validate options & environment
     lang = lang.toLowerCase();
     let error;
 
