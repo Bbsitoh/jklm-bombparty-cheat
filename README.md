@@ -11,7 +11,7 @@ This is a cheat script for https://jklm.fun BombParty game<br />Directly pasting
 3. Do one of the following options:
     - Set the Javascript context to bombparty/
     - Using the manual inspect element selection tool, select an element in the center of the game screen
-4. Paste the [script](index.js) in the console tab and hit enter
+4. Paste the [quick usage script](#quick-usage) or the [full script](index.js) in the console tab and hit enter
 
 -   Visual Guide: Setting javascript context to bombparty/<br />
     <img src="./docs/screenshot-1.png" width="300" /> <img src="./docs/screenshot-2.png" width="300" />
