@@ -19,6 +19,7 @@ Script by Swordax (https://linktr.ee/swordax)
 ) => {
     // variables
     const api = `https://random-word-api.herokuapp.com/word?lang=${lang}&number=${chunk}`;
+    const supportedLanguages = ["en", "es", "it", "fr", "de"];
     const logFontSize = "font-size:16px;";
     const logStyles = {
         error: "color:red;" + logFontSize,
@@ -53,8 +54,8 @@ Script by Swordax (https://linktr.ee/swordax)
         error =
             "incorrect javascript context, please switch to 'bombparty/' javascript context. Read the usage guide.";
 
-    if (!["en", "es", "it", "fr", "de"].includes(lang))
-        error = "supported languages are: en, es, it, fr, de";
+    if (!supportedLanguages.includes(lang))
+        error = `supported languages are: ${supportedLanguages.join(", ")}`;
 
     if (
         !Array.isArray(lengths) ||
