@@ -65,6 +65,7 @@ Options Guide:
     // elements
     const syllable = document.querySelector(".syllable");
     const selfTurn = document.querySelector(".selfTurn");
+    const seating = document.querySelector(".bottom .seating");
     const input = document.querySelector(".selfTurn input");
 
     // verify options & environment
@@ -84,6 +85,8 @@ Options Guide:
     )
         error = "Error: lengths must be an array of integers";
 
+    if (isNaN(pause)) error = "Error: pause must be a number";
+
     if (!Number.isInteger(chunk)) error = "Error: chunk must be an integer";
 
     if (!Number.isInteger(attempts))
@@ -95,15 +98,24 @@ Options Guide:
     }
 
     /**
-     * observer to detect changes in the .selfTurn element attributes
+     * observer to detect changes in the .selfTurn and .seating elements attributes
+     * we check the .seating element for `hidden` to make sure the game is started
+     *
      * when own turn comes, a `hidden` attribute is removed from the .selfTurn element
+     * we check that to determine if whether its own turn
      */
     const observer = new MutationObserver(() => {
+        if (seating.getAttribute("hidden") === null) return;
+
         myTurn = selfTurn.getAttribute("hidden") === null;
         cheat();
     });
 
     observer.observe(selfTurn, {
+        attributes: true,
+    });
+
+    observer.observe(seating, {
         attributes: true,
     });
 
