@@ -1,7 +1,6 @@
 # jklm.fun BombParty Cheat Script
 
-This is a cheat script for https://jklm.fun BombParty game<br />
-Directly pasting the script in the console wont work, read the usage guide below
+This is a cheat script for https://jklm.fun BombParty game<br />Directly pasting the script in the console wont work, read the usage guide below
 
 ## Usage Guide:
 
@@ -14,10 +13,12 @@ Directly pasting the script in the console wont work, read the usage guide below
     - Using the manual inspect element selection tool, select an element in the center of the game screen
 4. Paste the [script](index.js) in the console tab and hit enter
 
--   Setting javascript context to bombparty/<br />
+-   Visual Guide: Setting javascript context to bombparty/<br />
     <img src="./docs/screenshot-1.png" width="300" /> <img src="./docs/screenshot-2.png" width="300" />
 
 ## Options Guide:
+
+You don't have to provide options, as there are default values set.<br />Options can be edited in the beginning of the script code.
 
 | Option Name    | Option Type | Default Value | Description                                                                                                                                                        |
 | -------------- | ----------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
