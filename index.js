@@ -15,17 +15,19 @@ Usage Guide:
 4. Paste the script in the console tab and hit enter
 
 Options Guide:
-- `autotype`: when set true, the word will be automatically typed in your game input, you just have to hit enter
-- `selfOnly`: when set true, words will be logged in console only when its your own turn
-- `lang`: you can choose from the supported languages below:
-    - en: English
-    - es: Spanish
-    - it: Italian
-    - fr: French
-    - de: German
-- `lengths`: specifies the length of the words that will be attempted, increase lengths for more difficult words
-- `chunk`: specifies the number of words to fetch from the library on each attempt (keep default)
-- `attempts`: specifies the number of attemps (keep default)
+-   `autotype` (boolean): when set true, the word will be automatically typed in your game input, you just have to hit enter
+-   `selfOnly` (boolean): when set true, words will be logged in console only when its your own turn
+-   `lang` (string): you can choose from the supported languages below:
+    -   en: English
+    -   es: Spanish
+    -   it: Italian
+    -   fr: French
+    -   de: German
+-   `lengths` (array): specifies the length of the words that will be attempted. Increase lengths for more difficult words. Order of the lengths specifies length priority.
+-   `instant` (boolean): specifies typing mode; whether the word should be instantly pasted or slowly typed
+-   `pause` (number): typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)
+-   `chunk` (number): specifies the number of words to fetch from the words library on each attempt (keep default)
+-   `attempts` (number): specifies the number of attemps (keep default)
 */
 
 ((
@@ -33,6 +35,8 @@ Options Guide:
     selfOnly = false,
     lang = "en",
     lengths = [4, 5, 6],
+    instant = false,
+    pause = 150,
     chunk = 100,
     attempts = 20
 ) => {
@@ -90,7 +94,10 @@ Options Guide:
         return;
     }
 
-    // observer
+    /**
+     * observer to detect changes in the .selfTurn element attributes
+     * when own turn comes, a `hidden` attribute is removed from the .selfTurn element
+     */
     const observer = new MutationObserver(() => {
         myTurn = selfTurn.getAttribute("hidden") === null;
         cheat();
@@ -100,7 +107,22 @@ Options Guide:
         attributes: true,
     });
 
-    // fetch function
+    //
+    /**
+     * An asynchronous function to stop the code for a specified amount of time
+     * @param {number} time - pause duration in milliseconds
+     * @returns {Promise}
+     */
+    function sleep(time) {
+        return new Promise((res) => {
+            setTimeout(res, time);
+        });
+    }
+
+    /**
+     * Fetches the words library for a number of words and returns an array words
+     * @returns {Promise<Array.<string>>}
+     */
     function fetchWords() {
         return new Promise(async (resolve, reject) => {
             try {
@@ -119,7 +141,26 @@ Options Guide:
         });
     }
 
-    // cheat function
+    /**
+     * Types a word into the input letter by letter withg a pause in between to make it more human
+     * @param {string} word - A string of letters to type
+     */
+    async function typeLetters(word) {
+        for (const char of word) {
+            input.value = input.value + char;
+            input.dispatchEvent(new Event("input", { bubbles: true }));
+
+            // add margin in time to make it appear more human
+            const margin = Math.random() * pause - pause / 2;
+            await sleep(pause + margin);
+        }
+    }
+
+    /**
+     * A recursive function that keepts trying to find a word for a number of attempts
+     * @param {number} atmpts - Current number of attempts
+     * @returns
+     */
     function cheat(atmpts = 0) {
         if (atmpts >= attempts) {
             console.log("%cError: failed to find a word ;-;", logStyles.error);
@@ -129,8 +170,9 @@ Options Guide:
         const letters = syllable.innerText.toLowerCase();
 
         try {
-            fetchWords().then((data) => {
+            fetchWords().then(async (data) => {
                 const word = data.find((el) => el.includes(letters));
+
                 if (!word) return cheat(atmpts + 1);
 
                 if (!selfOnly || myTurn) {
@@ -140,8 +182,14 @@ Options Guide:
                     );
                 }
 
-                if (autotype) {
-                    input.value = word;
+                if (autotype && myTurn) {
+                    if (instant) {
+                        input.value = word;
+                    } else {
+                        await typeLetters(word);
+                    }
+
+                    // select input text so user has the immediate option to overwrite
                     input.select();
                 }
             });

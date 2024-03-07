@@ -19,17 +19,19 @@ Directly pasting the script in the console wont work, read the usage guide below
 
 ## Options Guide:
 
--   `autotype`: when set true, the word will be automatically typed in your game input, you just have to hit enter
--   `selfOnly`: when set true, words will be logged in console only when its your own turn
--   `lang`: you can choose from the supported languages below:
+-   `autotype` (boolean): when set true, the word will be automatically typed in your game input, you just have to hit enter
+-   `selfOnly` (boolean): when set true, words will be logged in console only when its your own turn
+-   `lang` (string): you can choose from the supported languages below:
     -   en: English
     -   es: Spanish
     -   it: Italian
     -   fr: French
     -   de: German
--   `lengths`: specifies the length of the words that will be attempted, increase lengths for more difficult words
--   `chunk`: specifies the number of words to fetch from the library on each attempt (keep default)
--   `attempts`: specifies the number of attemps (keep default)
+-   `lengths` (array): specifies the length of the words that will be attempted. Increase lengths for more difficult words. Order of the lengths specifies length priority.
+-   `instant` (boolean): specifies typing mode; whether the word should be instantly pasted or slowly typed
+-   `pause` (number): typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)
+-   `chunk` (number): specifies the number of words to fetch from the words library on each attempt (keep default)
+-   `attempts` (number): specifies the number of attemps (keep default)
 
 ## Quick Usage
 
