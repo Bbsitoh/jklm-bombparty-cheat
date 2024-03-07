@@ -34,7 +34,7 @@ You don't have to provide options, as there are default values set.<br />Options
 
 ## Quick Usage
 
-You can paste the script below to run the script quickly with the default options instead of having to copy paste the whole script code. Although, you still have to do the first three steps mentioned in [usage guide](#usage-guide)
+You can paste the script below in the console to run the script quickly with the default options instead of having to copy paste the whole script code. Although, you still have to do the first three steps mentioned in [usage guide](#usage-guide)
 
 ```js
 fetch(
