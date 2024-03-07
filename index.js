@@ -6,39 +6,27 @@ Read the usage guide (https://github.com/SwordaxSy/jklm-bombparty-cheat)
 Script by Swordax (https://linktr.ee/swordax)
 */
 
-((
+(async (
     autotype = true,
     selfOnly = false,
     lang = "en",
-    lengths = [4, 5, 6],
+    lengths = [],
     instant = false,
     pause = 150,
-    initialPause = 1000,
-    chunk = 100,
-    attempts = 20
+    initialPause = 1000
 ) => {
-    // variables
-    const api = `https://random-word-api.herokuapp.com/word?lang=${lang}&number=${chunk}`;
+    lang = lang.toLowerCase();
+
+    // constants
+    const api = `https://random-word-api.herokuapp.com/all?lang=${lang}`;
     const supportedLanguages = ["en", "es", "it", "fr", "de"];
     const logFontSize = "font-size:16px;";
     const logStyles = {
-        error: "color:red;" + logFontSize,
-        welcome: "color:cyan;" + logFontSize,
+        error: "color:crimson;" + logFontSize,
+        success: "color:cyan;" + logFontSize,
         word: "color:green;" + logFontSize,
         myWord: "color:lime;" + logFontSize,
     };
-    let myTurn = false;
-
-    // welcome log
-    console.log(
-        "%cWelcome to jklm.fun BombParty cheat script",
-        logStyles.welcome
-    );
-    console.log("%cBy Swordax: https://linktr.ee/swordax", logStyles.welcome);
-    console.log(
-        "%cGithub repo: https://github.com/SwordaxSy/jklm-bombparty-cheat",
-        logStyles.welcome
-    );
 
     // elements
     const syllable = document.querySelector(".syllable");
@@ -46,8 +34,22 @@ Script by Swordax (https://linktr.ee/swordax)
     const seating = document.querySelector(".bottom .seating");
     const input = document.querySelector(".selfTurn input");
 
+    // variables
+    let library;
+    let myTurn = false;
+
+    // welcome logs
+    console.log(
+        "%cWelcome to jklm.fun BombParty cheat script",
+        logStyles.success
+    );
+    console.log("%cBy Swordax: https://linktr.ee/swordax", logStyles.success);
+    console.log(
+        "%cGithub repo: https://github.com/SwordaxSy/jklm-bombparty-cheat",
+        logStyles.success
+    );
+
     // validate options & environment
-    lang = lang.toLowerCase();
     let error;
 
     if (!syllable || !selfTurn)
@@ -67,12 +69,31 @@ Script by Swordax (https://linktr.ee/swordax)
 
     if (isNaN(initialPause)) error = "initialPause must be a number";
 
-    if (!Number.isInteger(chunk)) error = "chunk must be an integer";
-
-    if (!Number.isInteger(attempts)) error = "attempts must be an integer";
-
     if (error) {
         console.log(`%cError: ${error}`, logStyles.error);
+        return;
+    }
+
+    /**
+     * fetch library
+     * filter for wanted lengths (if there are)
+     * shuffle words
+     */
+    try {
+        library = await (await fetch(api)).json();
+
+        if (lengths.length > 0) {
+            library = library.filter((el) => lengths.includes(el.length));
+        }
+
+        library = shuffle(library);
+
+        console.log("%cLibrary loaded 👍", logStyles.success);
+    } catch (err) {
+        console.log(
+            "%cError: couldn't load words library! :(",
+            logStyles.error
+        );
         return;
     }
 
@@ -98,7 +119,6 @@ Script by Swordax (https://linktr.ee/swordax)
         attributes: true,
     });
 
-    //
     /**
      * An asynchronous function to stop the code for a specified amount of time
      * @param {number} time - pause duration in milliseconds
@@ -111,29 +131,33 @@ Script by Swordax (https://linktr.ee/swordax)
     }
 
     /**
-     * Fetches the words library for a number of words and returns an array words
-     * @returns {Promise<Array.<string>>}
+     * Function to shuffle array using the fisher-yates algorithm
+     * @param {Array} array - Array to shuffle
+     * @returns {Array}
      */
-    function fetchWords() {
-        return new Promise(async (resolve, reject) => {
-            try {
-                const responses = await Promise.all(
-                    lengths.map((length) => fetch(api + `&length=${length}`))
-                );
+    function shuffle(array) {
+        const arr = JSON.parse(JSON.stringify(array));
+        let currentIndex = arr.length,
+            randomIndex;
 
-                const arrays = await Promise.all(
-                    responses.map((res) => res.json())
-                );
+        // While there remain elements to shuffle.
+        while (currentIndex > 0) {
+            // Pick a remaining element.
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex--;
 
-                resolve(arrays.flat(Infinity));
-            } catch (err) {
-                reject(err);
-            }
-        });
+            // And swap it with the current element.
+            [arr[currentIndex], arr[randomIndex]] = [
+                arr[randomIndex],
+                arr[currentIndex],
+            ];
+        }
+
+        return arr;
     }
 
     /**
-     * Types a word into the input letter by letter withg a pause in between to make it more human
+     * Function to type a word into the input letter by letter withg a pause in between to make it more human
      * @param {string} word - A string of letters to type
      */
     async function typeLetters(word) {
@@ -151,44 +175,38 @@ Script by Swordax (https://linktr.ee/swordax)
     }
 
     /**
-     * A recursive function that keepts trying to find a word for a number of attempts
-     * @param {number} atmpts - Current number of attempts
-     * @returns
+     * Cheat function
      */
-    function cheat(atmpts = 0) {
-        if (atmpts >= attempts) {
+    async function cheat() {
+        if (!library) return;
+
+        const letters = syllable.innerText.toLowerCase();
+        const word = library.find((el) => el.toLowerCase().includes(letters));
+
+        if (!word) {
             console.log("%cError: failed to find a word ;-;", logStyles.error);
             return;
         }
 
-        const letters = syllable.innerText.toLowerCase();
-
-        try {
-            fetchWords().then(async (data) => {
-                const word = data.find((el) => el.includes(letters));
-
-                if (!word) return cheat(atmpts + 1);
-
-                if (!selfOnly || myTurn) {
-                    console.log(
-                        `%c${word}`,
-                        myTurn ? logStyles.myWord : logStyles.word
-                    );
-                }
-
-                if (autotype && myTurn) {
-                    if (instant) {
-                        input.value = word;
-                    } else {
-                        await typeLetters(word);
-                    }
-
-                    // select input text so user has the immediate option to overwrite
-                    input.select();
-                }
-            });
-        } catch (err) {
-            console.log("%cError: something went wrong! :(", logStyles.error);
+        if (!selfOnly || myTurn) {
+            console.log(
+                `%c${word}`,
+                myTurn ? logStyles.myWord : logStyles.word
+            );
         }
+
+        if (autotype && myTurn) {
+            if (instant) {
+                input.value = word;
+            } else {
+                await typeLetters(word);
+            }
+
+            // select input text so user has the immediate option to overwrite
+            input.select();
+        }
+
+        // shuffle library after every query
+        library = shuffle(library);
     }
 })();

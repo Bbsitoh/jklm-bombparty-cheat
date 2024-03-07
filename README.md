@@ -20,17 +20,15 @@ This is a cheat script for https://jklm.fun BombParty game<br />Directly pasting
 
 You don't have to provide options, as there are default values set.<br />Options can be edited in the beginning of the script code.
 
-| Option Name    | Option Type | Default Value | Description                                                                                                                                                        |
-| -------------- | ----------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `autotype`     | Boolean     | `true`        | When set true, the word will be automatically typed in your game input, you just have to hit enter                                                                 |
-| `selfOnly`     | Boolean     | `false`       | When set true, words will be logged in console only when its your own turn                                                                                         |
-| `lang`         | String      | `"en"`        | You can choose one of the supported languages: en, es, it, fr, de                                                                                                  |
-| `lengths`      | Array       | `[4, 5, 6]`   | Specifies the length of the words that will be attempted. Increase lengths for more difficult words. The order of the lengths contributes in the priority of words |
-| `instant`      | Boolean     | `false`       | When set true, word will be instantly pasted and not typed letter by letter                                                                                        |
-| `pause`        | Number      | `150`         | Typing pause between letters (in milliseconds) (only effective if "instant" option is set to false)                                                                |
-| `initialPause` | Number      | `1000`        | The initial pause before typing the word (in milliseconds)                                                                                                         |
-| `chunk`        | Number      | `100`         | Specifies the number of words to fetch from the words library on each attempt                                                                                      |
-| `attempts`     | Number      | `20`          | Specifies the number of attemps                                                                                                                                    |
+| Option Name    | Option Type | Default Value | Description                                                                                         |
+| -------------- | ----------- | ------------- | --------------------------------------------------------------------------------------------------- |
+| `autotype`     | Boolean     | `true`        | When set true, the word will be automatically typed in your game input, you just have to hit enter  |
+| `selfOnly`     | Boolean     | `false`       | When set true, words will be logged in console only when its your own turn                          |
+| `lang`         | String      | `"en"`        | You can choose one of the supported languages: en, es, it, fr, de                                   |
+| `lengths`      | Array       | `[]`          | Specifies the length of words to be used by the script. If left empty, it will use all lengths      |
+| `instant`      | Boolean     | `false`       | When set true, word will be instantly pasted and not typed letter by letter                         |
+| `pause`        | Number      | `150`         | Typing pause between letters (in milliseconds) (only effective if "instant" option is set to false) |
+| `initialPause` | Number      | `1000`        | The initial pause before typing the word (in milliseconds)                                          |
 
 ## Quick Usage
 
