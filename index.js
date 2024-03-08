@@ -102,7 +102,7 @@ Script by Swordax (https://linktr.ee/swordax)
      * we check the .seating element for `hidden` to make sure the game is started
      *
      * when own turn comes, a `hidden` attribute is removed from the .selfTurn element
-     * we check that to determine if whether its own turn
+     * we check that to determine whether its own turn
      */
     const observer = new MutationObserver(() => {
         if (seating.getAttribute("hidden") === null) return;
@@ -140,13 +140,13 @@ Script by Swordax (https://linktr.ee/swordax)
         let currentIndex = arr.length,
             randomIndex;
 
-        // While there remain elements to shuffle.
+        // while there remain elements to shuffle
         while (currentIndex > 0) {
-            // Pick a remaining element.
+            // pick a remaining element
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
 
-            // And swap it with the current element.
+            // and swap it with the current element
             [arr[currentIndex], arr[randomIndex]] = [
                 arr[randomIndex],
                 arr[currentIndex],
@@ -157,7 +157,7 @@ Script by Swordax (https://linktr.ee/swordax)
     }
 
     /**
-     * Function to type a word into the input letter by letter withg a pause in between to make it more human
+     * Function to type a word into the input letter by letter with a pause in between to make it more human-like
      * @param {string} word - A string of letters to type
      */
     async function typeLetters(word) {
@@ -206,7 +206,7 @@ Script by Swordax (https://linktr.ee/swordax)
             input.select();
         }
 
-        // shuffle library after every query
+        // shuffle library after every cheat to prevent reuse of words
         library = shuffle(library);
     }
 })();
