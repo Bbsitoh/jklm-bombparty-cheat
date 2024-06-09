@@ -1,9 +1,9 @@
 /*
 This is a cheat script for https://jklm.fun BombParty game
 Directly pasting the script in the console wont work
-Read the usage guide (https://github.com/SwordaxSy/jklm-bombparty-cheat)
+Read the usage guide (https://github.com/MoBakour/jklm-bombparty-cheat)
 
-Script by Swordax (https://linktr.ee/swordax)
+Script by MoBakour (https://bakour.dev)
 */
 
 (async (
@@ -43,9 +43,9 @@ Script by Swordax (https://linktr.ee/swordax)
         "%cWelcome to jklm.fun BombParty cheat script",
         logStyles.success
     );
-    console.log("%cBy Swordax: https://linktr.ee/swordax", logStyles.success);
+    console.log("%cBy MoBakour: https://bakour.dev", logStyles.success);
     console.log(
-        "%cGithub repo: https://github.com/SwordaxSy/jklm-bombparty-cheat",
+        "%cGithub repo: https://github.com/MoBakour/jklm-bombparty-cheat",
         logStyles.success
     );
 

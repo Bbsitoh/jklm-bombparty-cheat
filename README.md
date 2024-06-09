@@ -36,7 +36,7 @@ You can paste the script below in the console to run the script quickly with the
 
 ```js
 fetch(
-    "https://raw.githubusercontent.com/SwordaxSy/jklm-bombparty-cheat/main/index.js"
+    "https://raw.githubusercontent.com/MoBakour/jklm-bombparty-cheat/main/index.js"
 )
     .then((res) => res.text())
     .then((data) => eval(data));
