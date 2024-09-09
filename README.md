@@ -25,7 +25,8 @@ You don't have to provide options, as there are default values set.<br />Options
 | `autotype`     | Boolean     | `true`        | When set true, the word will be automatically typed in your game input, you just have to hit enter  |
 | `selfOnly`     | Boolean     | `false`       | When set true, words will be logged in console only when its your own turn                          |
 | `lang`         | String      | `"en"`        | You can choose one of the supported languages: en, es, it, fr, de                                   |
-| `lengths`      | Array       | `[]`          | Specifies the length of words to be used by the script. If left empty, it will use all lengths      |
+| `min`          | Number      | `1`           | Minimum length of words (minimum 1)                                                                 |
+| `max`          | Number      | `Infinity`    | Maximum length of words (minimum 1)                                                                 |
 | `instant`      | Boolean     | `false`       | When set true, word will be instantly pasted and not typed letter by letter                         |
 | `pause`        | Number      | `150`         | Typing pause between letters (in milliseconds) (only effective if "instant" option is set to false) |
 | `initialPause` | Number      | `1000`        | The initial pause before typing the word (in milliseconds)                                          |
@@ -45,4 +46,4 @@ fetch(
 ## Dependencies
 
 -   This project makes use of this [API](https://random-word-api.herokuapp.com/)
--   If the script doesn't work. Then either the API is broken, or the game has been patched. Either way DM me to fix it
+-   If the script doesn't work. Then either the API is broken, or the game has been updated against the script. Either way [DM](https://discord.com/users/465453058667839499/) me to fix it

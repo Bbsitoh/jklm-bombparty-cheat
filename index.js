@@ -1,6 +1,6 @@
 /*
 This is a cheat script for https://jklm.fun BombParty game
-Directly pasting the script in the console wont work
+Directly pasting the script in the console may not work
 Read the usage guide (https://github.com/MoBakour/jklm-bombparty-cheat)
 
 Script by MoBakour (https://bakour.dev)
@@ -10,12 +10,13 @@ Script by MoBakour (https://bakour.dev)
     autotype = true,
     selfOnly = false,
     lang = "en",
-    lengths = [],
+    min = 1,
+    max = Infinity,
     instant = false,
     pause = 150,
     initialPause = 1000
 ) => {
-    lang = lang.toLowerCase();
+    lang = lang.toLowerCase().trim();
 
     // constants
     const api = `https://random-word-api.herokuapp.com/all?lang=${lang}`;
@@ -59,11 +60,10 @@ Script by MoBakour (https://bakour.dev)
     if (!supportedLanguages.includes(lang))
         error = `supported languages are: ${supportedLanguages.join(", ")}`;
 
-    if (
-        !Array.isArray(lengths) ||
-        !lengths.every((length) => Number.isInteger(length))
-    )
-        error = "lengths must be an array of integers";
+    if (isNaN(min) || isNaN(max) || min < 1 || max < 1)
+        error = "min and max values must be numerical values greater than 0";
+
+    if (max < min) error = "max cannot be less than min";
 
     if (isNaN(pause)) error = "pause must be a number";
 
@@ -76,16 +76,12 @@ Script by MoBakour (https://bakour.dev)
 
     /**
      * fetch library
-     * filter for wanted lengths (if there are)
+     * filter for min and max lengths
      * shuffle words
      */
     try {
         library = await (await fetch(api)).json();
-
-        if (lengths.length > 0) {
-            library = library.filter((el) => lengths.includes(el.length));
-        }
-
+        library = library.filter((el) => el.length >= min && el.length <= max);
         library = shuffle(library);
 
         console.log("%cLibrary loaded 👍", logStyles.success);
