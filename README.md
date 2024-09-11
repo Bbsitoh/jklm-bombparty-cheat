@@ -31,6 +31,8 @@ You don't have to provide options, as there are default values set.<br />Options
 | `pause`        | Number      | `150`         | Typing pause between letters (in milliseconds) (only effective if "instant" option is set to false) |
 | `initialPause` | Number      | `1000`        | The initial pause before typing the word (in milliseconds)                                          |
 
+In case you set autotype to false and still wanted to trigger the autotyping at some words, you can hit `Control` key to do that.
+
 ## Quick Usage
 
 You can paste the script below in the console to run the script quickly with the default options instead of having to copy paste the whole script code. Although, you still have to do the first three steps mentioned in [usage guide](#usage-guide)
