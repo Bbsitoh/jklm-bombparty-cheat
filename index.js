@@ -37,6 +37,7 @@ Script by MoBakour (https://bakour.dev)
 
     // variables
     let library;
+    let word;
     let myTurn = false;
 
     // welcome logs
@@ -155,10 +156,13 @@ Script by MoBakour (https://bakour.dev)
     /**
      * Function to type a word into the input letter by letter with a pause in between to make it more human-like
      * @param {string} word - A string of letters to type
+     * @param {boolean} [triggered] - A boolean to distinguish between observer's call and user's control keydown call
      */
-    async function typeLetters(word) {
+    async function typeLetters(word, triggered) {
         // initial pause
-        await sleep(initialPause);
+        if (!triggered) {
+            await sleep(initialPause);
+        }
 
         for (const char of word) {
             input.value = input.value + char;
@@ -172,30 +176,33 @@ Script by MoBakour (https://bakour.dev)
 
     /**
      * Cheat function
+     * @param {boolean} [triggered=false] - A boolean to distinguish between observer's call and user's control keydown call
      */
-    async function cheat() {
-        if (!library) return;
+    async function cheat(triggered = false) {
+        if (!library || (triggered && !myTurn)) return;
 
-        const letters = syllable.innerText.toLowerCase();
-        const word = library.find((el) => el.toLowerCase().includes(letters));
+        if (!triggered) {
+            const letters = syllable.innerText.toLowerCase();
+            word = library.find((el) => el.toLowerCase().includes(letters));
+        }
 
         if (!word) {
             console.log("%cError: failed to find a word ;-;", logStyles.error);
             return;
         }
 
-        if (!selfOnly || myTurn) {
+        if ((!selfOnly || myTurn) && !triggered) {
             console.log(
                 `%c${word}`,
                 myTurn ? logStyles.myWord : logStyles.word
             );
         }
 
-        if (autotype && myTurn) {
+        if ((autotype && myTurn) || triggered) {
             if (instant) {
                 input.value = word;
             } else {
-                await typeLetters(word);
+                await typeLetters(word, triggered);
             }
 
             // select input text so user has the immediate option to overwrite
@@ -205,4 +212,11 @@ Script by MoBakour (https://bakour.dev)
         // shuffle library after every cheat to prevent reuse of words
         library = shuffle(library);
     }
+
+    // trigger cheat on control keydown
+    window.addEventListener("keydown", (e) => {
+        if (e.key === "Control") {
+            cheat(true);
+        }
+    });
 })();
