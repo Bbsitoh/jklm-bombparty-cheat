@@ -9,7 +9,7 @@ Script by MoBakour (https://bakour.dev)
 (async (
     autotype = true,
     selfOnly = false,
-    lang = "en",
+    lang = "es",
     min = 1,
     max = Infinity,
     instant = false,
